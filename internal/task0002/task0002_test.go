@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestTodoListPostgres_Create(t *testing.T) {
+func TestSolution(t *testing.T) {
 	tests := []struct {
 		name  string
 		start int
