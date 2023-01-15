@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	fmt.Println("Please run tests...")
+	fmt.Println("Please run go test for details")
 }
