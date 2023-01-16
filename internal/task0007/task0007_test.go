@@ -11,7 +11,7 @@ var (
 	testHeadForNode1 = makeSecondTestHead()
 )
 
-func TestTask0006Solution(t *testing.T) {
+func TestTask0007Solution(t *testing.T) {
 	tests := []struct {
 		name  string
 		head  *ListNode
