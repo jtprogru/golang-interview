@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestTask0005Solution(t *testing.T) {
+func TestTask0006Solution(t *testing.T) {
 	tests := []struct {
 		name  string
 		prod  uint64
