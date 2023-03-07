@@ -7,6 +7,11 @@ export SYS_GO=$(shell which go)
 export SYS_GOFMT=$(shell which gofmt)
 export SYS_GOLANGCI_LINT=$(shell which golangci-lint)
 
+LAST_TASK_NUM=$(shell find internal -type d -name 'task*' | sort -V | tail -1 | sed -r 's/internal\/task([0-9]+)/\1/' | sed -E 's/^0+//' )
+NEW_TASK_NAME=$(shell printf 'task%04d' $$(( ${LAST_TASK_NUM} + 1)) )
+NEW_TEST_NAME=$(shell printf 'task%04d_test' $$(( ${LAST_TASK_NUM} + 1)) )
+
+
 .PHONY: run
 ## Run as go run cmd/main.go
 run: cmd/main.go
@@ -16,6 +21,14 @@ run: cmd/main.go
 ## Install all requirements
 tidy: go.mod
 	$(SYS_GO) mod tidy
+
+.PHONY: newtask
+## Add new task with test file
+newtask:
+	@mkdir -p internal/${NEW_TASK_NAME}/
+	@touch internal/${NEW_TASK_NAME}/${NEW_TASK_NAME}.go
+	@touch internal/${NEW_TASK_NAME}/${NEW_TEST_NAME}.go
+
 
 .PHONY: fmt
 ## Run go fmt
