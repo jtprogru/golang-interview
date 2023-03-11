@@ -13,16 +13,16 @@ var (
 
 func TestTask0007Solution(t *testing.T) {
 	tests := []struct {
-		name  string
-		head  *ListNode
-		node  *ListNode
-		whant *ListNode
+		name string
+		head *ListNode
+		node *ListNode
+		want *ListNode
 	}{
 		{
 			name: "head = [4,5,1,9], node = 5",
 			head: testHeadForNode5,
 			node: testHeadForNode5.Next,
-			whant: &ListNode{
+			want: &ListNode{
 				Val: 4,
 				Next: &ListNode{
 					Val: 1,
@@ -37,7 +37,7 @@ func TestTask0007Solution(t *testing.T) {
 			name: "head = [4,5,1,9], node = 1",
 			head: testHeadForNode1,
 			node: testHeadForNode1.Next.Next,
-			whant: &ListNode{
+			want: &ListNode{
 				Val: 4,
 				Next: &ListNode{
 					Val: 5,
@@ -53,7 +53,7 @@ func TestTask0007Solution(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			Solution(tt.node)
-			assert.Equal(t, tt.head, tt.whant)
+			assert.Equal(t, tt.head, tt.want)
 		})
 	}
 }

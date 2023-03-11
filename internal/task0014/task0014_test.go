@@ -8,10 +8,10 @@ import (
 
 func TestTask0014Solution(t *testing.T) {
 	tests := []struct {
-		name  string
-		l1    *ListNode
-		l2    *ListNode
-		whant *ListNode
+		name string
+		l1   *ListNode
+		l2   *ListNode
+		want *ListNode
 	}{
 		{
 			name: "example 1",
@@ -35,7 +35,7 @@ func TestTask0014Solution(t *testing.T) {
 					},
 				},
 			},
-			whant: &ListNode{
+			want: &ListNode{
 				Val: 7,
 				Next: &ListNode{
 					Val: 0,
@@ -56,7 +56,7 @@ func TestTask0014Solution(t *testing.T) {
 				Val:  0,
 				Next: nil,
 			},
-			whant: &ListNode{
+			want: &ListNode{
 				Val:  0,
 				Next: nil,
 			},
@@ -98,7 +98,7 @@ func TestTask0014Solution(t *testing.T) {
 					},
 				},
 			},
-			whant: &ListNode{
+			want: &ListNode{
 				Val: 8,
 				Next: &ListNode{
 					Val: 9,
@@ -129,7 +129,7 @@ func TestTask0014Solution(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			res := Solution(tt.l1, tt.l2)
-			assert.Equal(t, res, tt.whant)
+			assert.Equal(t, res, tt.want)
 		})
 	}
 }
