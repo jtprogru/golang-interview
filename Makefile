@@ -40,6 +40,13 @@ fmt:
 vet:
 	$(SYS_GO) vet ./...
 
+.PHONY: testalltasks
+## Run tests without caching
+testalltasks:
+	for test in $$(find internal -type d -mindepth 1); do \
+		go test -v $${test}/*.go; \
+	done;
+
 .PHONY: test
 ## Run tests without caching
 test:

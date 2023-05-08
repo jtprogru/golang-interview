@@ -1,5 +1,7 @@
 package task0003
 
+import "strings"
+
 func Solution(str, ending string) bool {
-	panic("not implemented...")
+	return strings.HasSuffix(str, ending)
 }

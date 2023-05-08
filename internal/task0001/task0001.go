@@ -12,7 +12,7 @@ type Resp struct {
 }
 
 func changeName(person *Person) {
-	person = &Person{
+	*person = Person{
 		Name: "Alice",
 	}
 }
