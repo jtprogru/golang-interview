@@ -10,5 +10,8 @@ type ListNode struct {
 }
 
 func Solution(node *ListNode) {
-	panic("need to implement...")
+	if node.Next != nil {
+		node.Val = node.Next.Val
+		node.Next = node.Next.Next
+	}
 }
