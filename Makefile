@@ -43,12 +43,12 @@ vet:
 .PHONY: testverb
 ## Run tests without caching
 testverb:
-	@$(SYS_GO) clean -testcache && $(SYS_GO) test -v ./...
+	@$(SYS_GO) clean -testcache && $(SYS_GO) test -v ./internal/...
 
 .PHONY: test
 ## Run tests without caching
 test:
-	@$(SYS_GO) clean -testcache && $(SYS_GO) test ./...
+	@$(SYS_GO) clean -testcache && $(SYS_GO) test ./internal/...
 
 .PHONY: lint
 ## Run golangci-lint
