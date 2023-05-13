@@ -2,7 +2,7 @@
 https://leetcode.com/explore/interview/card/top-interview-questions-easy/93/linked-list/560/
 */
 
-package task0019
+package task0023
 
 type ListNode struct {
 	Val  int
