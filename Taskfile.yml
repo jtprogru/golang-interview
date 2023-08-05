@@ -15,8 +15,6 @@ vars:
     sh: which go
   SYS_GOFMT:
     sh: which gofmt
-  SYS_GOLANGCI_LINT:
-    sh: which golangci-lint
 
 tasks:
   default:
@@ -87,3 +85,6 @@ tasks:
     cmds:
       - "{{ .SYS_GOLANGCI_LINT }} -v run --out-format=colored-line-number"
     silent: true
+    vars:
+      SYS_GOLANGCI_LINT:
+        sh: which golangci-lint
