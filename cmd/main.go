@@ -16,7 +16,7 @@ func main() {
 	fmt.Println("Тестирование успешно завершено")
 	// Здесь ваш код для основной логики программы
 	fmt.Println("Для более подробного вывода запускать:")
-	fmt.Println("\tmake testalltasks")
+	fmt.Println("\ttask testverb")
 }
 
 func runTests(pattern string) error {

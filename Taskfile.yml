@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+---
+version: "3"
+
+set:
+  - pipefail
+
+silent: false
+
+env:
+  ENV: development
+
+vars:
+  SYS_GO:
+    sh: which go
+  SYS_GOFMT:
+    sh: which gofmt
+  SYS_GOLANGCI_LINT:
+    sh: which golangci-lint
+
+tasks:
+  default:
+    cmd: task --list
+    silent: true
+
+  run:
+    desc: Run as go run cmd/main.go
+    preconditions:
+      - test -f cmd/main.go
+    cmds:
+      - "{{ .SYS_GO }} run cmd/main.go"
+    silent: true
+
+  tidy:
+    desc: Install all requirements
+    preconditions:
+      - test -f go.mod
+    cmds:
+      - "{{ .SYS_GO }} mod tidy"
+    silent: true
+
+  newtask:
+    desc: Add new task with test file
+    cmds:
+      - mkdir -p internal/{{ .NEW_TASK_NAME }}/
+      - touch internal/{{ .NEW_TASK_NAME }}/{{ .NEW_TASK_NAME }}.go
+      - touch internal/{{ .NEW_TASK_NAME }}/{{ .NEW_TEST_NAME }}.go
+      - echo "package {{ .NEW_TASK_NAME }}" > internal/{{ .NEW_TASK_NAME }}/{{ .NEW_TASK_NAME }}.go
+      - echo "package {{ .NEW_TASK_NAME }}" > internal/{{ .NEW_TASK_NAME }}/{{ .NEW_TEST_NAME }}.go
+    vars:
+      LAST_TASK_NUM:
+        sh: find internal -type d -name 'task*' | sort -V | tail -1 | sed -r 's/internal\/task([0-9]+)/\1/' | sed -E 's/^0+//'
+      NEW_TASK_NUM:
+        sh: "expr {{ .LAST_TASK_NUM }} + 1"
+      NEW_TASK_NAME:
+        sh: printf 'task%04d' {{ .NEW_TASK_NUM }}
+      NEW_TEST_NAME:
+        sh: printf 'task%04d_test' {{ .NEW_TASK_NUM }}
+    silent: true
+
+  fmt:
+    desc: Run go fmt
+    cmd: "{{ .SYS_GOFMT }} -s -w ."
+    silent: true
+
+  vet:
+    desc: Run go vet ./...
+    cmd: "{{ .SYS_GO }} vet ./..."
+    silent: true
+
+  testverb:
+    desc: Run tests without caching in verbose mode
+    cmds:
+      - "{{ .SYS_GO }} clean -testcache"
+      - "{{ .SYS_GO }} test -v ./internal/..."
+    silent: true
+
+  test:
+    desc: Run tests without caching
+    cmds:
+      - "{{ .SYS_GO }} clean -testcache"
+      - "{{ .SYS_GO }} test ./internal/..."
+    silent: true
+
+  lint:
+    desc: Run golangci-lint
+    cmds:
+      - "{{ .SYS_GOLANGCI_LINT }} -v run --out-format=colored-line-number"
+    silent: true
