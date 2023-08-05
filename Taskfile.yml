@@ -45,6 +45,9 @@ tasks:
       - touch internal/{{ .NEW_TASK_NAME }}/{{ .NEW_TEST_NAME }}.go
       - echo "package {{ .NEW_TASK_NAME }}" > internal/{{ .NEW_TASK_NAME }}/{{ .NEW_TASK_NAME }}.go
       - echo "package {{ .NEW_TASK_NAME }}" > internal/{{ .NEW_TASK_NAME }}/{{ .NEW_TEST_NAME }}.go
+      - echo
+      - echo "New task module available in:"
+      - echo "internal/{{ .NEW_TASK_NAME }}/"
     vars:
       LAST_TASK_NUM:
         sh: find internal -type d -name 'task*' | sort -V | tail -1 | sed -r 's/internal\/task([0-9]+)/\1/' | sed -E 's/^0+//'
